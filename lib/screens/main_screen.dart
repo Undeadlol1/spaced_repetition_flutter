@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  MainScreen({Key key}) : super(key: key);
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _counter = 20;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: Center(
+          child: GestureDetector(
+            onTap: () => setState(() => {if (_counter > 0) _counter--}),
             child: Card(
-                color: Colors.blue,
-                child: SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Center(child: Text('Test'))))),
+              child: SizedBox(
+                height: 200,
+                width: 100000,
+                child: Center(
+                  child: Text('Cards remaining: $_counter'),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
