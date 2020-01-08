@@ -7,8 +7,18 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
+class MemoryCard {
+  String question;
+  String answer;
+
+  MemoryCard({this.question, this.answer});
+}
+
 class _MainScreenState extends State<MainScreen> {
-  int _counter = 20;
+  final List<MemoryCard> _cards = [
+    MemoryCard(question: 'Who is the best?', answer: 'Me'),
+    MemoryCard(question: 'Who is the coolest?', answer: 'Also Me')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +26,15 @@ class _MainScreenState extends State<MainScreen> {
       body: Container(
         child: Center(
           child: GestureDetector(
-            onTap: () => setState(() => {if (_counter > 0) _counter--}),
+            onTap: () => setState(() => _cards.removeLast()),
             child: Card(
               child: SizedBox(
                 height: 200,
                 width: 100000,
                 child: Center(
-                  child: Text('Cards remaining: $_counter'),
+                  child: Text(
+                    _cards.isEmpty ? 'Deck is empty' : _cards.last.question,
+                  ),
                 ),
               ),
             ),
