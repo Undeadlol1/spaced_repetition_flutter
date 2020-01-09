@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-
-class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
+import 'package:spaced_repetition_flutter/screens/main/widgets/swipable_cards.dart';
 
 class MemoryCard {
   String question;
   String answer;
 
   MemoryCard({this.question, this.answer});
+}
+
+class MainScreen extends StatefulWidget {
+  MainScreen({Key key}) : super(key: key);
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -23,23 +24,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: GestureDetector(
-            onTap: () => setState(() => _cards.removeLast()),
-            child: Card(
-              child: SizedBox(
-                height: 200,
-                width: 100000,
-                child: Center(
-                  child: Text(
-                    _cards.isEmpty ? 'Deck is empty' : _cards.last.question,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+      body: SwipableCards(
+        cards: _cards,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
