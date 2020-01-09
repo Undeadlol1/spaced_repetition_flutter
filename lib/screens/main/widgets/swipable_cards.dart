@@ -12,6 +12,8 @@ class SwipableCards extends StatefulWidget {
 }
 
 class _SwipableCardsState extends State<SwipableCards> {
+  List<String> tappedCards = [];
+
   @override
   Widget build(BuildContext context) {
     // CardController controller; //Use this to trigger swap.
@@ -21,34 +23,35 @@ class _SwipableCardsState extends State<SwipableCards> {
           child: Container(
               height: MediaQuery.of(context).size.height * 0.6,
               child: TinderSwapCard(
-                  orientation: AmassOrientation.BOTTOM,
-                  totalNum: widget.cards.length,
-                  stackNum: 2,
                   swipeEdge: 4.0,
+                  totalNum: widget.cards.length,
+                  orientation: AmassOrientation.TOP,
                   maxWidth: MediaQuery.of(context).size.width * 0.9,
                   maxHeight: MediaQuery.of(context).size.width * 0.9,
                   minWidth: MediaQuery.of(context).size.width * 0.8,
                   minHeight: MediaQuery.of(context).size.width * 0.8,
-                  cardBuilder: (context, index) => TapableCard(
-                        card: widget.cards[index],
-                        restrictToSingleTap: true,
+                  cardBuilder: (context, index) => GestureDetector(
+                        onTap: () => setState(() {
+                          tappedCards.add(widget.cards[index].id);
+                        }),
+                        child: TapableCard(
+                          card: widget.cards[index],
+                          restrictToSingleTap: true,
+                          isCardTapped:
+                              tappedCards.contains(widget.cards[index].id),
+                        ),
                       ),
                   // cardController: controller = CardController(),
-                  swipeUpdateCallback:
-                      (DragUpdateDetails details, Alignment align) {
-                    print(details);
-
-                    /// Get swiping card's alignment
-                    if (align.x < 0) {
-                      //Card is LEFT swiping
-                    } else if (align.x > 0) {
-                      //Card is RIGHT swiping
-                    }
-                  },
                   swipeCompleteCallback:
                       (CardSwipeOrientation orientation, int index) {
-                    Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text(orientation.toString())));
+                    print('index $index');
+                    print('orientation $orientation');
+
+                    if (orientation != CardSwipeOrientation.RECOVER) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('You swiped to the ' +
+                              orientation.toString().toLowerCase())));
+                    }
 
                     /// Get orientation & index of swiped card!
                   }))),

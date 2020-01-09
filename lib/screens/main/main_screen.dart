@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:spaced_repetition_flutter/screens/main/widgets/swipable_cards.dart';
 
 class MemoryCard {
+  String id;
   String question;
   String answer;
 
-  MemoryCard({this.question, this.answer});
+  MemoryCard({this.id, this.question, this.answer});
 }
 
 class MainScreen extends StatefulWidget {
@@ -17,8 +18,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<MemoryCard> _cards = [
-    MemoryCard(question: 'Who is the best?', answer: 'Me'),
-    MemoryCard(question: 'Who is the coolest?', answer: 'Also Me')
+    MemoryCard(id: '123', question: 'Who is the best?', answer: 'Me'),
+    MemoryCard(id: '321', question: 'Who is the coolest?', answer: 'Also Me')
   ];
 
   @override
