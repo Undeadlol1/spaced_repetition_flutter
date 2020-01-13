@@ -16,13 +16,11 @@ class _SwipableCardsState extends State<SwipableCards> {
 
   @override
   Widget build(BuildContext context) {
-    // CardController controller; //Use this to trigger swap.
-
-    return new Scaffold(
-      body: new Center(
-          child: Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: TinderSwapCard(
+    return Scaffold(
+        body: Center(
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: TinderSwapCard(
                   swipeEdge: 4.0,
                   totalNum: widget.cards.length,
                   orientation: AmassOrientation.TOP,
@@ -31,30 +29,29 @@ class _SwipableCardsState extends State<SwipableCards> {
                   minWidth: MediaQuery.of(context).size.width * 0.8,
                   minHeight: MediaQuery.of(context).size.width * 0.8,
                   cardBuilder: (context, index) => GestureDetector(
-                        onTap: () => setState(() {
-                          tappedCards.add(widget.cards[index].id);
-                        }),
-                        child: TapableCard(
-                          card: widget.cards[index],
-                          restrictToSingleTap: true,
-                          isCardTapped:
-                              tappedCards.contains(widget.cards[index].id),
-                        ),
-                      ),
-                  // cardController: controller = CardController(),
-                  swipeCompleteCallback:
-                      (CardSwipeOrientation orientation, int index) {
-                    print('index $index');
-                    print('orientation $orientation');
+                    onTap: () => _memorizeTappedCard(index),
+                    child: TapableCard(
+                      card: widget.cards[index],
+                      restrictToSingleTap: true,
+                      isCardTapped:
+                          tappedCards.contains(widget.cards[index].id),
+                    ),
+                  ),
+                  swipeCompleteCallback: _showSnackbar,
+                ))));
+  }
 
-                    if (orientation != CardSwipeOrientation.RECOVER) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('You swiped to the ' +
-                              orientation.toString().toLowerCase())));
-                    }
+  void _memorizeTappedCard(int index) {
+    setState(() {
+      tappedCards.add(widget.cards[index].id);
+    });
+  }
 
-                    /// Get orientation & index of swiped card!
-                  }))),
-    );
+  void _showSnackbar(CardSwipeOrientation orientation, int index) {
+    if (orientation != CardSwipeOrientation.RECOVER) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'You swiped to the ' + orientation.toString().toLowerCase())));
+    }
   }
 }
