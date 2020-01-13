@@ -28,15 +28,27 @@ class _SwipableCardsState extends State<SwipableCards> {
                   maxHeight: MediaQuery.of(context).size.width * 0.9,
                   minWidth: MediaQuery.of(context).size.width * 0.8,
                   minHeight: MediaQuery.of(context).size.width * 0.8,
-                  cardBuilder: (context, index) => GestureDetector(
-                    onTap: () => _memorizeTappedCard(index),
-                    child: TapableCard(
-                      card: widget.cards[index],
-                      restrictToSingleTap: true,
-                      isCardTapped:
-                          tappedCards.contains(widget.cards[index].id),
-                    ),
-                  ),
+                  cardBuilder: (context, index) =>
+                      widget.cards.length == tappedCards.length
+                          ? Center(
+                              child: Card(
+                                child: Center(
+                                  child: Text(
+                                    'This was the last card!',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: () => _memorizeTappedCard(index),
+                              child: TapableCard(
+                                card: widget.cards[index],
+                                restrictToSingleTap: true,
+                                isCardTapped: tappedCards
+                                    .contains(widget.cards[index].id),
+                              ),
+                            ),
                   swipeCompleteCallback: _showSnackbar,
                 ))));
   }
