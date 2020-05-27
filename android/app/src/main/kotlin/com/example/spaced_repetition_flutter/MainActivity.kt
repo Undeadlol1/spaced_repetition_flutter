@@ -1,4 +1,4 @@
-package com.example.spaced_repetition_flutter
+package com.palei.spaced-repetition
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
