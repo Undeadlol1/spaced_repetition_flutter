@@ -19,14 +19,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_tindercard: ^0.1.8
+  flutter_tindercard: ^0.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  firebase_core: ^0.4.5
-  firebase_analytics: ^5.0.14
-  firebase_auth: ^0.16.1
+  cupertino_icons: ^1.0.3
+  firebase_core: ^1.8.0
+  firebase_analytics: ^8.3.4
+  firebase_auth: ^3.1.4
 
 dev_dependencies:
   test: ^1.9.4
