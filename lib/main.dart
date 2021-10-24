@@ -5,7 +5,6 @@ import 'package:spaced_repetition_flutter/screens/create_card/create_card_screee
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,8 +14,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MainScreen(),
-        '/create_card': (context) => CreateCardScreen(),
+        '/': (_) => MainScreen(),
+        '/create_card': (_) => CreateCardScreen(),
       },
     );
   }
