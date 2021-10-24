@@ -3,15 +3,15 @@ import 'package:spaced_repetition_flutter/screens/main/main_screen.dart';
 import 'package:spaced_repetition_flutter/screens/main/widgets/tapable_card.dart';
 
 class SwipableCards extends StatefulWidget {
-  List<MemoryCard> cards = [];
-  SwipableCards({Key key, this.cards}) : super(key: key);
+  List<MemoryCard>? cards = [];
+  SwipableCards({Key? key, this.cards}) : super(key: key);
 
   @override
   _SwipableCardsState createState() => _SwipableCardsState();
 }
 
 class _SwipableCardsState extends State<SwipableCards> {
-  List<String> tappedCards = [];
+  List<String?> tappedCards = [];
   List<String> swipedCards = [];
 
   @override
@@ -21,7 +21,7 @@ class _SwipableCardsState extends State<SwipableCards> {
       body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.6,
-          child: swipedCards.length == widget.cards.length
+          child: swipedCards.length == widget.cards!.length
               ? Card(
                   child: Center(
                   child: Text('Good job!'),
@@ -54,7 +54,7 @@ class _SwipableCardsState extends State<SwipableCards> {
 
   void _memorizeTappedCard(int index) {
     setState(() {
-      tappedCards.add(widget.cards[index].id);
+      tappedCards.add(widget.cards![index].id);
     });
   }
 

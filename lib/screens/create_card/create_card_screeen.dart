@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreateCardScreen extends StatelessWidget {
-  const CreateCardScreen({Key key}) : super(key: key);
+  const CreateCardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CardCreateFormState extends State<CardCreateForm> {
               controller: _frontTextController,
               validator: (value) {
                 final emptyError = 'Please enter some text';
-                if (value.trim().isEmpty) return emptyError;
+                if (value!.trim().isEmpty) return emptyError;
                 return null;
               },
             ),
@@ -55,7 +55,7 @@ class CardCreateFormState extends State<CardCreateForm> {
               decoration: InputDecoration(labelText: 'Back'),
               validator: (value) {
                 final emptyError = 'Please enter some text';
-                if (value.trim().isEmpty) return emptyError;
+                if (value!.trim().isEmpty) return emptyError;
                 return null;
               },
             ),
@@ -65,7 +65,7 @@ class CardCreateFormState extends State<CardCreateForm> {
             child: Center(
               child: RaisedButton(
                 onPressed: () {
-                  if (_formKey.currentState.validate()) {
+                  if (_formKey.currentState!.validate()) {
                     Scaffold.of(context).showSnackBar(
                         SnackBar(content: Text('Processing Data')));
                     print('front ${_frontTextController.text}');

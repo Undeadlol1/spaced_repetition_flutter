@@ -6,11 +6,15 @@ class MemoryCard {
   String question;
   String answer;
 
-  MemoryCard({this.id, this.question, this.answer});
+  MemoryCard({
+    required this.id,
+    required this.question,
+    required this.answer,
+  });
 }
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
+  MainScreen({Key? key}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();

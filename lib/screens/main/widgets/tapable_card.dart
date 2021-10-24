@@ -5,9 +5,13 @@ import 'package:spaced_repetition_flutter/screens/main/main_screen.dart';
 
 class TapableCard extends StatefulWidget {
   MemoryCard card;
-  bool restrictToSingleTap = false;
-  bool isCardTapped = false;
-  TapableCard({Key key, this.card, this.restrictToSingleTap, this.isCardTapped})
+  bool? restrictToSingleTap = false;
+  bool? isCardTapped = false;
+  TapableCard(
+      {Key? key,
+      required this.card,
+      this.restrictToSingleTap,
+      this.isCardTapped})
       : super(key: key);
 
   @override
@@ -32,7 +36,7 @@ class _TapableCardState extends State<TapableCard> {
             height: 200,
             width: 100000,
             child: Center(
-              child: Text(widget.isCardTapped
+              child: Text(widget.isCardTapped!
                   ? widget.card.answer
                   : widget.card.question),
             ),
